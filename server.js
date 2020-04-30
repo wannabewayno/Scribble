@@ -4,7 +4,7 @@ const path = require('path');
 
 const app = express();
 const PORT = 8080;
-const localhost = `http://localhost${PORT}`
+const localhost = `http://localhost:${PORT}`
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
