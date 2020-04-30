@@ -4,7 +4,8 @@
   "description": "Ideas? rants? recipes? Scribble has you covered.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "Wayne Griffiths",
   "license": "MIT",
@@ -17,11 +18,11 @@
     "url": "git+https://github.com/wannabewayno/Scribble.git"
   },
   "keywords": [
-    "[node",
+    "node",
     "javascript",
     "express",
     "notes",
-    "scribble]"
+    "scribble"
   ],
   "bugs": {
     "url": "https://github.com/wannabewayno/Scribble/issues"
