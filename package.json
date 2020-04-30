@@ -1,16 +1,30 @@
 {
-    "name": "note-taker",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-      "express": "^4.16.4",
-      "mysql": "^2.16.0"
-    }
-  }
-  
+  "name": "scribble",
+  "version": "1.0.0",
+  "description": "Ideas? rants? recipes? Scribble has you covered.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wayne Griffiths",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql": "^2.16.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wannabewayno/Scribble.git"
+  },
+  "keywords": [
+    "[node",
+    "javascript",
+    "express",
+    "notes",
+    "scribble]"
+  ],
+  "bugs": {
+    "url": "https://github.com/wannabewayno/Scribble/issues"
+  },
+  "homepage": "https://github.com/wannabewayno/Scribble#readme"
+}
