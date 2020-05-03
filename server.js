@@ -58,7 +58,7 @@ app.post('/api/notes',(req,res)=>{
     newNote.id = uuidv4();
     
     //save this note into the data base
-    notes.push(newNote);
+    notes[newNote.id] = newNote;
 
     //store all our data into the journal.json file.
     fs.writeFile('./db/journal.json',JSON.stringify(notes),(err) =>{

@@ -109,8 +109,8 @@ const renderNoteList = function(notes) {
 
   const noteListItems = [];
 
-  for (let i = 0; i < notes.length; i++) {
-    const note = notes[i];
+  for (const key in notes) {
+    const note = notes[key];
 
     const $li = $("<li class='list-group-item'>").data(note);
     const $span = $("<span>").text(note.title);
@@ -126,11 +126,8 @@ const renderNoteList = function(notes) {
 };
 
 // Gets notes from the db and renders them to the sidebar
-const getAndRenderNotes = function() {
-  return getNotes().then(function(data) {
-    renderNoteList(data);
-  });
-};
+const getAndRenderNotes = () => getNotes()
+  .then(data => renderNoteList(data));
 
 $saveNoteBtn.on("click", handleNoteSave);
 $noteList.on("click", ".list-group-item", handleNoteView);
