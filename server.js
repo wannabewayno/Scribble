@@ -69,8 +69,16 @@ app.post('/api/notes',(req,res)=>{
     //end the response 
     res.end();
 });
-
-// app.delete('api/notes/:id')
+// delete notes.
+app.delete('/api/notes/:id',(req,res) => {
+    const id = req.params.id;
+    delete notes[id];
+    fs.writeFile('./db/journal.json',JSON.stringify(notes),(err) =>{
+        if (err) {throw new Error("Error updating data")};
+        console.log("Note succesfully deleted, data updated");
+    });
+    res.end();
+})
 
 //=========== Starts server ===========================
 app.listen(PORT, () => {
