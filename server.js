@@ -3,11 +3,15 @@ const fs = require('fs');
 const open = require('open');
 const express = require('express');
 const path = require('path');
-const router = require('./public/assets/js/routeMap.js');
+const router = require('./public/assets/js/router.js');
 const { v4: uuidv4 } = require('uuid');
+const update = require('./public/assets/js/update.js')
+
+// define our global variables global variables
 const app = express();
-const PORT = 8080;
-const localhost = `http://localhost:${PORT}`
+const PORT = 8080; 
+const localhost = `http://localhost:${PORT}` //url of deployed application
+let notes; //stores retrieved data
 
 // Sets up Express app to load static files from 'public'
 app.use(express.static(path.join('public')));
@@ -22,14 +26,13 @@ app.get('/',(req,res) => {
     res.sendFile(path.join(__dirname,'./public/html/index.html'));
 });
 
-//handles all other routing.
+// handles all other routing via router.js, define additional paths in router.js via the routeMap object
 app.get('/:routeKey',(req,res) => {
     res.sendFile(router(req.params.routeKey));
 });
 
-//============ API DATA ==================
-// creates a global variable to store out retrieved data base in
-let notes;
+// ============ API DATA ==================
+
 // retrieves notes from journal.json and saves into our global variable 'notes'
 fs.readFile('./db/journal.json','utf8',(err,data) =>{
     if (err) {throw new Error(`Can't retrieve saved notes`)}
@@ -37,50 +40,44 @@ fs.readFile('./db/journal.json','utf8',(err,data) =>{
     notes = JSON.parse(data);
 });
 
-//=========== API routing =========
+// =========== API routing =========
 
 //Displays all saved notes as a JSON file
 app.get('/api/notes',(req,res) => {
     return res.json(notes);
 })
 
-//GET request method to search for notes by id
+// GET request method to search for notes by id
 app.get('/api/notes/:id',(req,res) => {
     console.log(req.params);
     return res.json(notes[1].journal);
 })
 
-//POST request method to add notes to our master JSON file.
+// POST request method to add notes to our master JSON file.
 app.post('/api/notes',(req,res)=>{
     const newNote = req.body
     console.log(newNote);
     // give this note a unique id using the uuid package;
     newNote.id = uuidv4();
     
-    //save this note into the data base
+    // save this note into the data base
     notes[newNote.id] = newNote;
 
-    //store all our data into the journal.json file.
-    fs.writeFile('./db/journal.json',JSON.stringify(notes),(err) =>{
-        if (err) {throw new Error("Error saving data")};
-        console.log("Data succesfully saved");
-    });
+    // store all our data into the journal.json file.
+    update(notes,"post");
 
-    //end the response 
+    // end the response 
     res.end();
 });
 // delete notes.
 app.delete('/api/notes/:id',(req,res) => {
     const id = req.params.id;
     delete notes[id];
-    fs.writeFile('./db/journal.json',JSON.stringify(notes),(err) =>{
-        if (err) {throw new Error("Error updating data")};
-        console.log("Note succesfully deleted, data updated");
-    });
+    update(notes,"delete")
     res.end();
 })
 
-//=========== Starts server ===========================
+// =========== Starts server ===========================
 app.listen(PORT, () => {
     console.log(`Server running at ${localhost}`);
     open(localhost);
