@@ -33,7 +33,7 @@ app.get('/:routeKey',(req,res) => {
 
 // ============ API DATA ==================
 
-// retrieves notes from journal.json and saves into our global variable 'notes'
+// retrieves notes from data.json and saves into our global variable 'notes'
 fs.readFile('./db/data.json','utf8',(err,data) =>{
     if (err) {throw new Error(`Can't retrieve saved notes`)}
     console.log(`Data extracted successfully`);
@@ -45,12 +45,6 @@ fs.readFile('./db/data.json','utf8',(err,data) =>{
 //Displays all saved notes as a JSON file
 app.get('/api/notes',(req,res) => {
     return res.json(notes);
-})
-
-// GET request method to search for notes by id
-app.get('/api/notes/:id',(req,res) => {
-    console.log(req.params);
-    return res.json(notes[1].journal);
 })
 
 // POST request method to add notes to our master JSON file.
@@ -69,7 +63,8 @@ app.post('/api/notes',(req,res)=>{
     // end the response 
     res.end();
 });
-// delete notes.
+
+//DELETE request to delete notes.
 app.delete('/api/notes/:id',(req,res) => {
     const id = req.params.id;
     delete notes[id];
