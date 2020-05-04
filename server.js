@@ -34,7 +34,7 @@ app.get('/:routeKey',(req,res) => {
 // ============ API DATA ==================
 
 // retrieves notes from journal.json and saves into our global variable 'notes'
-fs.readFile('./db/journal.json','utf8',(err,data) =>{
+fs.readFile('./db/data.json','utf8',(err,data) =>{
     if (err) {throw new Error(`Can't retrieve saved notes`)}
     console.log(`Data extracted successfully`);
     notes = JSON.parse(data);

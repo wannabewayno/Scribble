@@ -6,7 +6,7 @@ methodStack.delete = () => console.log("Note succesfully deleted, data updated")
 methodStack.post = () => console.log("Data succesfully updated")
 
 const update = (data,method) => {
-    fs.writeFile('./db/journal.json',JSON.stringify(data),(err) =>{
+    fs.writeFile('./db/data.json',JSON.stringify(data),(err) =>{
         if (err) {throw new Error("Error updating data")};
         methodStack[method];
     });
