@@ -83,6 +83,6 @@ app.use(notFound);
 // ============================================== Starts server ===========================
 app.listen(PORT, () => {
     console.log(`Server running at ${localhost}`);
-    open(localhost);
+    // open(localhost);
 });
 
