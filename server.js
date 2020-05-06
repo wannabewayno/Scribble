@@ -10,7 +10,7 @@ const notFound = require('./public/assets/js/notFound.js');
 
 // define our global variables global variables
 const app = express();
-const PORT = 8080; 
+const PORT = process.env.PORT || 8080; 
 const localhost = `http://localhost:${PORT}` //url of deployed application
 let notes; //stores retrieved data
 
