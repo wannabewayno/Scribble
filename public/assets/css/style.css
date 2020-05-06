@@ -7,6 +7,10 @@ html, body {
   .save-note {
     display: none;
   }
+
+  .jumbotron>img{
+    z-index: 0;
+  }
   
   .icons i {
     margin-left: 15px;
